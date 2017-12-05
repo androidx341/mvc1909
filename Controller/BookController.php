@@ -2,18 +2,30 @@
 
 namespace Controller;
 
-class BookController
+use Framework\BaseController;
+
+class BookController extends BaseController
 {
     public function indexAction()
     {
         // get db connection
         // fetch books
         // render template
-        return 'html for book/index';
+        $books = [
+            'book 1',
+            'book 2'
+        ];
+        
+        $test = 123;
+        
+        return $this->render('index.phtml', [
+            'books' => $books, 
+            'a' => $test
+        ]);
     }
     
     public function showAction()
     {
-        return 'html for book/show';
+        return $this->render('show.phtml');
     }
 }

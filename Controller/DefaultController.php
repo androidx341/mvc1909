@@ -2,15 +2,17 @@
 
 namespace Controller;
 
-class DefaultController
+use Framework\BaseController;
+
+class DefaultController extends BaseController
 {
     public function indexAction()
     {
-        return 'html for default/index';
+        return $this->render('index.phtml');
     }
     
     public function feedbackAction()
     {
-        return 'html for default/feedback';
+        return $this->render('feedback.phtml');
     }
 }
