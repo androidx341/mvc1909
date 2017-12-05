@@ -9,14 +9,14 @@
 <body>
     
     <div class='menu'>
-        <a href="/index.php">Home</a>
-        <a href="/index.php">Books</a>
-        <a href="/index.php">Contact us</a>
+        <a href="/">Home</a>
+        <a href="/index.php?controller=Book&amp;action=index">Books</a>
+        <a href="/index.php?controller=Default&amp;action=feedback">Contact us</a>
     </div>
     
     <hr>
     
-    Content
+    <?=$content?>
     
 </body>
 </html>

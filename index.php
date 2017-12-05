@@ -22,5 +22,17 @@ define('VIEW_DIR', ROOT . 'View' . DS);
 
 $request = new \Framework\Request($_GET, $_POST, $_FILES);
 
+$controller = $request->get('controller', 'Default');
+$action = $request->get('action', 'index');
 
+$controller = '\\Controller\\' . $controller . 'Controller'; // ex: '\Controller\Default' . 'Controller'
+$action .= 'Action'; // ex: 'feedback' . 'Action'
+
+$controller = new $controller();
+
+if (!method_exists($controller, $action)) {
+    throw new \Exception("Action {$action} not found");
+}
+
+$content = $controller->$action();
 require VIEW_DIR . 'layout.phtml';

@@ -21,22 +21,22 @@ class Request
         
     }
     
-    public function post($key)
+    public function post($key, $default = null)
     {
         if (isset($this->post[$key])) {
             return $this->post[$key];
         }
         
-        return null;
+        return $default;
     }
     
-    public function get($key)
+    public function get($key, $default = null)
     {
         if (isset($this->get[$key])) {
             return $this->get[$key];
         }
         
-        return null;
+        return $default;
     }
     
     public function isPost()
