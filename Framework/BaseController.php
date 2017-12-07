@@ -4,21 +4,28 @@ namespace Framework;
 
 abstract class BaseController
 {
+    protected $container;
+    
+    public function setContainer(Container $container)
+    {
+        $this->container = $container;
+        
+        return $this;
+    }
+    
     protected function render($template, array $params = [])
     {
         extract($params);
-        // [
-        //     'books' => 123,
-        //     'test' => 3345
-        // ]
-        
-        // =>> $books = 123
-        // $test = 3345
+        // get folder path 
         $folder =  str_replace(['Controller', '\\'], '',  get_class($this));
+        $template = VIEW_DIR . $folder . DS . $template;
+        
+        if (!file_exists($template)) {
+            throw new \Exception("{$template} not found");
+        }
+        
         ob_start();
-        
-        require VIEW_DIR . $folder . DS . $template;
-        
+        require $template;
         return ob_get_clean();
     }
 }
