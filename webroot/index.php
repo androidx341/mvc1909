@@ -9,6 +9,8 @@ spl_autoload_register(function($className) {
         $file
     );
     
+    $file = ROOT . $file;
+    
     if (!file_exists($file)) {
         throw new \Exception("{$file} not found");
     }
@@ -17,7 +19,7 @@ spl_autoload_register(function($className) {
 });
 
 define('DS', DIRECTORY_SEPARATOR);
-define('ROOT', __DIR__ . DS);
+define('ROOT', __DIR__ . DS . '..' . DS);
 define('VIEW_DIR', ROOT . 'View' . DS);
 
 // temporary - refactor later
