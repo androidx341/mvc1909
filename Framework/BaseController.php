@@ -26,6 +26,10 @@ abstract class BaseController
         
         ob_start();
         require $template;
+        $content = ob_get_clean();
+        
+        ob_start();
+        require VIEW_DIR . 'layout.phtml';
         return ob_get_clean();
     }
     

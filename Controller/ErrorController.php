@@ -15,7 +15,9 @@ class ErrorController extends BaseController
     
     public function errorAction()
     {
-        return $this->render('error.phtml');
+        return $this->render('error.phtml', [
+            'message' => $this->exception->getMessage()
+        ]);
     }
     
     public function error404Action()

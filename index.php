@@ -73,4 +73,6 @@ try {
     $content = $controller->errorAction();
 }
 
-require VIEW_DIR . 'layout.phtml';
+echo $content;
+
+// require VIEW_DIR . 'layout.phtml';
