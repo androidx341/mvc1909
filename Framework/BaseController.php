@@ -28,4 +28,13 @@ abstract class BaseController
         require $template;
         return ob_get_clean();
     }
+    
+    protected function getRepository($forEntity)
+    {
+        return $this
+            ->container
+            ->get('repository_factory')
+            ->createRepository($forEntity)
+        ;
+    }
 }

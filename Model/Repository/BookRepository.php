@@ -38,4 +38,26 @@ class BookRepository
         
         return $collection;
     }
+    
+    public function find($id)
+    {
+        $collection = [];
+        $sth = $this->pdo->prepare('select * from book where id = :id');
+        $sth->execute(['id' => $id]);
+        
+        $res = $sth->fetch(\PDO::FETCH_ASSOC); 
+        
+        if (!$res) {
+            return null;
+        }
+        
+        return (new Book())
+            ->setId($res['id'])
+            ->setTitle($res['title'])
+            ->setDescription($res['description'])
+            ->setPrice($res['price'])
+            ->setIsActive($res['is_active'])
+            ->setCategory($res['category_id'])
+        ;
+    }
 }
