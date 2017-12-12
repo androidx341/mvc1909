@@ -41,4 +41,12 @@ abstract class BaseController
             ->createRepository($forEntity)
         ;
     }
+    
+    protected function getRouter()
+    {
+        return $this
+            ->container
+            ->get('router')
+        ;
+    }
 }

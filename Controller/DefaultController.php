@@ -4,6 +4,8 @@ namespace Controller;
 
 use Framework\BaseController;
 use Framework\Request;
+use Model\Form\FeedbackForm;
+use Model\Entity\Feedback;
 
 class DefaultController extends BaseController
 {
@@ -14,16 +16,26 @@ class DefaultController extends BaseController
     
     public function feedbackAction(Request $request)
     {
-        // $_POST['user'] --> $request->post('user')
+        $form = new FeedbackForm(
+            $request->post('email'),  // $_POST['email']
+            $request->post('message')
+        );
         
-        // if ($_POST) {
-            // if (valid()) {
-                // 
+        if ($request->isPost()) {
+            if ($form->isValid()) {
                 
-                // Router::redirect - bad idea
-                // $this->container->get('router')->redirect('http://...');
-            // }
-        // }
+                $feedback = new Feedback(
+                    $form->email,
+                    $form->message
+                );
+                
+                $this->getRepository('Feedback')->save($feedback);
+                $this
+                    ->getRouter()
+                    ->redirect('/index.php?controller=Default&action=feedback')
+                ;
+            }
+        }
         
         return $this->render('feedback.phtml');
     }
