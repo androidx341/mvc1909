@@ -7,12 +7,6 @@ use Framework\Request;
 
 class DefaultController extends BaseController
 {
-    private $pdo;
-    
-    public function __construct(\PDO $pdo)
-    {
-    }
-    
     public function indexAction(Request $request)
     {
         return $this->render('index.phtml');

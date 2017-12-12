@@ -11,9 +11,9 @@ class CategoryRepository
     /**
      * @var \PDO
      */ 
-    private $pdo;
+    protected $pdo;
     
-    public function __construct(\PDO $pdo)
+    public function setPdo(\PDO $pdo)
     {
         $this->pdo = $pdo;
     }

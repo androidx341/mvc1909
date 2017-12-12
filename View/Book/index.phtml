@@ -1,3 +1,5 @@
 <h1>Books list</h1>
 
-<?=var_dump($books) ?>
+<?php foreach ($books as $book) : ?>
+    <?=$book->getTitle(); ?> <?=$book->getPrice()?> | <a href="/index.php?controller=Book&amp;action=show">Details</a> <br>
+<?php endforeach ?>
