@@ -4,6 +4,7 @@ namespace Controller;
 
 use Framework\BaseController;
 use Framework\Request;
+use Framework\Session;
 use Model\Form\FeedbackForm;
 use Model\Entity\Feedback;
 
@@ -30,13 +31,20 @@ class DefaultController extends BaseController
                 );
                 
                 $this->getRepository('Feedback')->save($feedback);
+                
+                Session::setFlash('Saved');
+                
                 $this
                     ->getRouter()
                     ->redirect('/index.php?controller=Default&action=feedback')
                 ;
             }
+            
+            Session::setFlash('Form invalid');
         }
         
-        return $this->render('feedback.phtml');
+        return $this->render('feedback.phtml', [
+            'form' => $form
+        ]);
     }
 }

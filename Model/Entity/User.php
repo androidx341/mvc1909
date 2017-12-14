@@ -2,17 +2,17 @@
 
 namespace Model\Entity;
 
-class Feedback
+class User
 {
     private $id;
     private $email;
-    private $message;
+    private $password;
     
-    public function __construct($email, $message)
+    public function __construct($email = null)
     {
         $this->email = $email;
-        $this->message = $message;
     }
+    
     public function getId()
     {
         return $this->id;
@@ -37,14 +37,14 @@ class Feedback
         return $this;
     }
     
-    public function getMessage()
+    public function getPassword()
     {
-        return $this->message;
+        return $this->password;
     }
     
-    public function setMessage($message)
+    public function setPassword($password)
     {
-        $this->message = $message;
+        $this->password = $password;
         
         return $this;
     }

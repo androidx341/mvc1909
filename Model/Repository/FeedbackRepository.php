@@ -2,7 +2,7 @@
 
 namespace Model\Repository;
 
-use Model\Entity\Category;
+use Model\Entity\Feedback;
 
 class FeedbackRepository
 {
@@ -18,7 +18,11 @@ class FeedbackRepository
     
     public function save(Feedback $feedback)
     {
-        // instert into ...
-        // pdo->execute()
+        $sql = 'insert into feedback (email, message) values (:email, :message)';
+        $sth = $this->pdo->prepare($sql);
+        $sth->execute([
+            'email' => $feedback->getEmail(),
+            'message' => $feedback->getMessage()
+        ]);
     }
 }

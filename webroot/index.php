@@ -33,6 +33,7 @@ $dbConfig = [
 $dsn = "mysql: host={$dbConfig['host']}; dbname={$dbConfig['dbname']}";
 
 try {
+    \Framework\Session::start();
     
     $request = new \Framework\Request($_GET, $_POST, $_FILES);
     $container = new \Framework\Container();
@@ -58,6 +59,7 @@ try {
     
     $controller = new $controller();
     $controller->setContainer($container);
+    $controller->doLayoutDecision();
     
     // var_dump($controller);die;
     

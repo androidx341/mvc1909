@@ -6,6 +6,22 @@ abstract class BaseController
 {
     protected $container;
     
+    private $layout = 'layout.phtml';
+    
+    private function setAdminLayout()
+    {
+        $this->layout = 'admin_layout.phtml';
+    }
+    
+    public function doLayoutDecision()
+    {
+        $class = get_class($this);
+        
+        if (strpos($class, 'Admin') !== false) {
+            $this->setAdminLayout();    
+        }
+    }
+    
     public function setContainer(Container $container)
     {
         $this->container = $container;
@@ -16,9 +32,12 @@ abstract class BaseController
     protected function render($template, array $params = [])
     {
         extract($params);
-        // get folder path 
-        $folder =  str_replace(['Controller', '\\'], '',  get_class($this));
-        $template = VIEW_DIR . $folder . DS . $template;
+        
+        $path = str_replace('Controller', '', get_class($this));
+        $path = trim($path, '\\');
+        $path = str_replace('\\', DS, $path);
+        
+        $template = VIEW_DIR . $path . DS . $template;
         
         if (!file_exists($template)) {
             throw new \Exception("{$template} not found");
@@ -29,7 +48,7 @@ abstract class BaseController
         $content = ob_get_clean();
         
         ob_start();
-        require VIEW_DIR . 'layout.phtml';
+        require VIEW_DIR . $this->layout;
         return ob_get_clean();
     }
     

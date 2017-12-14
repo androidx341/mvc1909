@@ -1,13 +1,13 @@
 <?php
 
-namespace Model\Form\FeedbackForm;
+namespace Model\Form;
 
 class FeedbackForm
 {
     public $email;
     public $message;
     
-    public function __construct($email, $message)
+    public function __construct($email = null, $message = null)
     {
         $this->email = $email;
         $this->message = $message;
