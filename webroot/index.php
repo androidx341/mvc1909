@@ -21,8 +21,18 @@ spl_autoload_register(function($className) {
 define('DS', DIRECTORY_SEPARATOR);
 define('ROOT', __DIR__ . DS . '..' . DS);
 define('VIEW_DIR', ROOT . 'View' . DS);
+define('VENDOR_DIR', ROOT . 'vendor' . DS);
+
+require VENDOR_DIR . 'autoload.php';
 
 // temporary - refactor later
+
+/**
+ * remove DB config to file ROOT/config/config.yml
+ * use composer to install: composer require symfony/yaml
+ * $array = Yaml::parse(file_get_contents(path/to/config.yml))
+ */ 
+
 $dbConfig = [
     'user' => 'root',
     'pass' => '',
@@ -34,6 +44,9 @@ $dsn = "mysql: host={$dbConfig['host']}; dbname={$dbConfig['dbname']}";
 
 try {
     \Framework\Session::start();
+    
+    $loader = new \Twig_Loader_Filesystem(VIEW_DIR);
+    $twig = new \Twig_Environment($loader);
     
     $request = new \Framework\Request($_GET, $_POST, $_FILES);
     $container = new \Framework\Container();
@@ -49,6 +62,7 @@ try {
         ->set('pdo', $dbConnection)
         ->set('router', $router)
         ->set('repository_factory', $repositoryFactory)
+        ->set('twig', $twig)
     ;
     
     $controller = $request->get('controller', 'Default');
@@ -78,5 +92,3 @@ try {
 }
 
 echo $content;
-
-// require VIEW_DIR . 'layout.phtml';
