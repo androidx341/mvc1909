@@ -31,25 +31,19 @@ abstract class BaseController
     
     protected function render($template, array $params = [])
     {
-        extract($params);
+        $twig = $this->container->get('twig');
         
         $path = str_replace('Controller', '', get_class($this));
         $path = trim($path, '\\');
         $path = str_replace('\\', DS, $path);
         
-        $template = VIEW_DIR . $path . DS . $template;
+        $template = $path . DS . $template;
         
-        if (!file_exists($template)) {
+        if (!file_exists(VIEW_DIR . $template)) {
             throw new \Exception("{$template} not found");
         }
         
-        ob_start();
-        require $template;
-        $content = ob_get_clean();
-        
-        ob_start();
-        require VIEW_DIR . $this->layout;
-        return ob_get_clean();
+        return $twig->render($template, $params);
     }
     
     protected function getRepository($forEntity)

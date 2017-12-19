@@ -12,7 +12,7 @@ class DefaultController extends BaseController
 {
     public function indexAction(Request $request)
     {
-        return $this->render('index.phtml');
+        return $this->render('index.html.twig', ['a' => '<b>1</b>']);
     }
     
     public function feedbackAction(Request $request)
