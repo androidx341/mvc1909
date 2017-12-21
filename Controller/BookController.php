@@ -18,7 +18,7 @@ class BookController extends BaseController
             ->findAll()
         ;
         
-        return $this->render('index.phtml', [
+        return $this->render('index.html.twig', [
             'books' => $books, 
         ]);
     }
@@ -35,7 +35,7 @@ class BookController extends BaseController
             throw new NotFoundException('Book not found');
         }
         
-        return $this->render('show.phtml', [
+        return $this->render('show.html.twig', [
             'book' => $book
         ]);
     }

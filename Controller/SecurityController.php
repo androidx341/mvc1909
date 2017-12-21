@@ -39,7 +39,7 @@ class SecurityController extends BaseController
             }
         }
         
-        return $this->render('login.phtml', [
+        return $this->render('login.html.twig', [
             'form' => $form
         ]);
     }

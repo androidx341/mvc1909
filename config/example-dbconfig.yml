@@ -1,0 +1,5 @@
+#Reaname file to dbconfig.yml to use
+user: admin
+pass: admin
+host: 127.0.0.1
+dbname: default

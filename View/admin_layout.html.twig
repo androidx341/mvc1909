@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MVC</title>
+</head>
+<body>
+    <h1>ADMIN</h1>
+    <div class='menu'>
+        <a href="?controller=Admin\Defaultz">Home</a>
+        <a href="/index.php?controller=Admin\Book&amp;action=index">Books</a>
+        <a href="/index.php?controller=Admin\Default">Contact us</a>
+        <a href="/index.php?controller=Security&amp;action=logout">Logout</a>
+    </div>
+    
+    <hr>
+    {#<?=\Framework\Session::getFlash() ?>#}
+    {##}
+    {#<?=$content?>#}
+    {% block content %} {% endblock %}
+</body>
+</html>

@@ -26,20 +26,12 @@ define('VENDOR_DIR', ROOT . 'vendor' . DS);
 require VENDOR_DIR . 'autoload.php';
 
 // temporary - refactor later
-
 /**
  * remove DB config to file ROOT/config/config.yml
  * use composer to install: composer require symfony/yaml
  * $array = Yaml::parse(file_get_contents(path/to/config.yml))
- */ 
-
-$dbConfig = [
-    'user' => 'root',
-    'pass' => '',
-    'host' => 'localhost',
-    'dbname' => 'mvc'
-];
-
+ */
+$dbConfig = Symfony\Component\Yaml\Yaml::parseFile(ROOT.'config'.DS.'dbconfig.yml');
 $dsn = "mysql: host={$dbConfig['host']}; dbname={$dbConfig['dbname']}";
 
 try {
@@ -87,6 +79,7 @@ try {
     $controller = new \Controller\ErrorController($e);
     $content = $controller->error404Action();
 } catch (\Exception $e) {
+    dump($e);
     $controller = new \Controller\ErrorController($e);
     $content = $controller->errorAction();
 }

@@ -43,7 +43,7 @@ class DefaultController extends BaseController
             Session::setFlash('Form invalid');
         }
         
-        return $this->render('feedback.phtml', [
+        return $this->render('feedback.html.twig', [
             'form' => $form
         ]);
     }

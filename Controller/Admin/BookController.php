@@ -13,7 +13,7 @@ class BookController extends BaseController
     
     public function indexAction(Request $request)
     {
-       
+       return $this->render('index.html.twig');
     }
     
     public function editAction(Request $request)

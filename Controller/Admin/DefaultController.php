@@ -16,6 +16,6 @@ class DefaultController extends BaseController
             throw new \Exception('Access denied');
         }
         
-        return $this->render('index.phtml');
+        return $this->render('index.html.twig');
     }
 }
